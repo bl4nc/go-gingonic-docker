@@ -1,4 +1,4 @@
-# Build a express GO application Templete for docker
+# Build a GO with Gingonic application Templete for docker
 
 ## Guia
 
