@@ -1,4 +1,4 @@
-module tecnicos_service
+module api
 
 go 1.18
 

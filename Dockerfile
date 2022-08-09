@@ -6,4 +6,4 @@ WORKDIR /go/src/
 COPY . .
 RUN GOOS=linux go build -ldflags="-s -w"
 EXPOSE $PORT
-CMD ["./tecnicos_service"]
+CMD ["./api"]

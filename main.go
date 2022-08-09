@@ -1,9 +1,8 @@
 package main
 
 import (
-	"net/http"
+	"api/controllers"
 	"os"
-	"tecnicos_service/controllers"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -27,7 +26,6 @@ func CORSMiddleware() gin.HandlerFunc {
 			c.AbortWithStatus(204)
 			return
 		}
-
 		c.Next()
 	}
 }
@@ -38,14 +36,7 @@ func setupRouter() *gin.Engine {
 
 	r.Use(CORSMiddleware())
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
-	})
-
-	tecnicosRepo := controllers.New()
-	r.GET("/tecnico_id/:id", tecnicosRepo.GetTecnicoId)
-	r.GET("/tecnico_login/:login", tecnicosRepo.GetTecnicoLogin)
-	r.GET("/tecnicos", tecnicosRepo.GetTecnicos)
+	r.GET("/", controllers.HelloWorld)
 
 	return r
 
