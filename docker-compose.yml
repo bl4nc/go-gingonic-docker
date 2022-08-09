@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+    networks:
+      - rede_local
+
+  tecnicos_service:
+    container_name: tecnicos_service
+    environment:
+     - DB_HOST=156.67.72.201
+     - DB_PASS=Devmis@1
+     - DB_USER=u748436382_developer_mr
+     - DB_NAME=u748436382_mitra_reverso
+     - REDIS_PASS=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+     - APP_PORT=8888
+    build: ./
+    restart: always
+    ports:
+      - 8888:8888
+    depends_on:
+      - redis
+    networks:
+      - rede_local
+      
+volumes:
+  cache:
+    driver: local
+
+networks:
+  rede_local:
+    driver: bridge
+
